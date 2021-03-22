@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const SECRET_KEY = `tester`;
+const SECRET_KEY = `rahasia`;
 
 const generateJwt = (user) => {
     const token = jwt.sign(user, SECRET_KEY);
