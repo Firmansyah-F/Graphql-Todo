@@ -3,6 +3,7 @@ const typeDefs = gql`
     type Query {
         users : [User]
         todos : [Todo]
+        comments : [Comment]
     }
 
     type User {
@@ -10,8 +11,7 @@ const typeDefs = gql`
         username : String
         email : String
         password : String
-        salt : String
-        photo : String
+        todos : [Todo]
     }
 
     type Todo {
@@ -19,8 +19,15 @@ const typeDefs = gql`
         userId : Int
         title : String
         description : String
-        attachment : String
+        comments : [Comment]
     }
+
+    type Comment {
+        id : Int
+        body : String
+        todoId : Int
+    }
+
 
     type AuthPayload {
         id:Int!
@@ -38,8 +45,7 @@ const typeDefs = gql`
             username : String
             email : String
             password : String
-            salt : String
-            photo : String
+
         ):User
 
         updateUser(
@@ -47,8 +53,7 @@ const typeDefs = gql`
             username : String
             email : String
             password : String
-            salt : String
-            photo : String
+
         ):User
 
         deleteUser(id : Int):User
@@ -59,7 +64,7 @@ const typeDefs = gql`
             userId : Int
             title : String
             description : String
-            attachment : String
+            
         ):Todo
 
         updateTodo(
@@ -67,10 +72,24 @@ const typeDefs = gql`
             userId : Int
             title : String
             description : String
-            attachment : String
         ):Todo
 
         deleteTodo(id : Int):Todo
+
+
+
+        createComment(
+            body :  String
+            todoId : Int
+        ):Comment
+
+        updateComment(
+            id : Int
+            body :  String
+            todoId : Int
+        ):Comment
+
+        deleteComment(id : Int):Comment
     
     
     }
